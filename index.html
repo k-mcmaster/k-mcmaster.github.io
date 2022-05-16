@@ -14574,7 +14574,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Introduction"><center>Introduction</center><a class="anchor-link" href="#Introduction">&#182;</a></h3><p>Fans are often known for using their talents and dedication to create new media based on the things they enjoy. One of the best examples of this is the writing and reading of fanfiction, the practice in which amateur authors may take aspects from the original content that they enjoyed and transforming them into original works of their own creation. There are various methods that these authors use to share their works with other individuals who also enjoyed the original piece of media but one of the most common is to post the work to a dedicated site for the posting and reading of fanfiction. While there are quite a few options available, we'll be focusing on Archive of Our Own, known colloquially as AO3, for our purposes as AO3's built in tagging and data storage system will allow us to search through the works of fiction using the author's own tags for their work rather than attempting to create tags ourself.</p>
 <p>However, since AO3 currently has over nine million works, in order to better analyze the data associated with the site and trends of fanfiction authors, we'll be focusing on writings by fans of a specific piece of media: the Harry Potter series written by J.K. Rowling.<a href="https://archiveofourown.org/works/search?work_search%5Bquery%5D=">[1]</a> Additionally, we'll be specifically be focusing on the fanfiction written around a specific date in time as there are over 300,000 works for that series alone.</p>
-<p>On June 6th of 2020, author J.K. Rowling took to Twitter to express her displeasure over the use of the phrase "people who menstruate" rather than the word women.<a href="https://www.glamour.com/story/a-complete-breakdown-of-the-jk-rowling-transgender-comments-controversy">[2]</a> This tweet and the subsequent tweets that followed it came under a lot of backlash with trans activists and fans of the Harry Potter series. This was not the first time that author J.K. Rowling had expressed such views and received backlash, but it is one of the most notable, so we will be aanalyzing works of fanfiction posted onto AO3 for the two weeks before the tweet was made and the two weeks following the tweet to view the potential impact that Rowling's postings may have had on the writings of the LGBTQIA+ community members and their allies.</p>
+<p>On June 6th of 2020, author J.K. Rowling took to Twitter to express her displeasure over the use of the phrase "people who menstruate" rather than the word women.<a href="https://www.glamour.com/story/a-complete-breakdown-of-the-jk-rowling-transgender-comments-controversy">[2]</a> This tweet and the subsequent tweets that followed it came under a lot of backlash with trans activists and fans of the Harry Potter series. This was not the first time that author J.K. Rowling had expressed such views and received backlash, but it is one of the most notable, so we will be analyzing works of fanfiction posted onto AO3 for the two weeks before the tweet was made and the two weeks following the tweet to view the potential impact that Rowling's postings may have had on the writings of the LGBTQIA+ community members and their allies.</p>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><b>An Important Note:</b> Content posted on AO3, while subject to AO3's terms of service, is not policed for the actual content itself. AO3's dedication to protect the authors who post on their site means that content posted to the site can contain a wide array of mature content, as most of their focus on author protection are centered around protecting the author from backlash by the original owners of the potentially trademarked intellectual property. Per their own site: "The Archive does not prescreen for content. Complaints are investigated only when they are submitted through the appropriate channels and with the appropriate information."<a href="https://archiveofourown.org/tos#content">[3]</a> Users are expected to police their own media consumption through the use of the built-in tagging system. This means that some of the information we collect about fics for this project may mention or allude to mature themes.</p>
 
 </div>
 </div>
@@ -14622,7 +14630,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Next, we need to inspect the page to see how the data on each page is stored. By using the developers tools, we can see that the results of the search are displayed in a class identified as a “works index group" and each work is a list item below that with the role "article". We know that there are 3,523 works to be consumed, and there are 20 works displayed on each search page so we'll need to request the informtion from 177 pages. We split the URL into parts before and after the page number is stored to that we can complete our requests through an iterative process which automatically updates the page number used to request data. Then we initialize a couple new files to store the content from the scraping as we'll be completing it in page portions and that would make it difficult to store as a pandas dataframe right off the bat.</p>
+<p>With our libaries imported, we can start off by initializing some of the necessary variables and setting up the CSV file we will be using to temporarily store all of this data. We know that there are 3,523 works to be consumed, and there are 20 works displayed on each search page so we'll need to request the informtion from 177 pages. We split the URL into parts before and after the page number is stored to that we can complete our requests through an iterative process which automatically updates the page number used to request data. Then we initialize a new files to store the content from the scraping as we'll be completing it in page portions and that would make it difficult to store as a pandas dataframe right off the bat.</p>
 
 </div>
 </div>
@@ -14659,7 +14667,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Now that we've completed some of our basic work, we can begin to design some of the functions we'll need to call to scrape the data out of the page. Specifically, we'll need one function to read in the content off the page. One piece of information that we could scrape but are choosing not to for the purpose of this project is the actual Comments on the published works. While this could have some interested information for us to take a look at, we are already dealing with an extremely large amount of data and the Comments section of each work does not have any bearing on what our true aim is with this project.</p>
+<p>Now that we've completed some of our basic work, we can begin to design some of the functions we'll need to call to scrape the data out of the page. First, we have inspect the page to see how the data on each page is stored. By using the developers tools, we can see that the results of the search are displayed in a class identified as a “works index group" and each work is a list item below that with the role "article".</p>
+<center><b>Page Inspection Using Web Developer Tools</b></center>
+<center><img src="PageInspect.png"></center><p>We'll use that information to define our helper function that will take the BeautifulSoup from a page, add the relevant information about the work to various lists and then store those lists into the CSV file that we previously initialized.</p>
+<p>There are a couple interesting things to note here about the information we are choosing to gather. AO3 has built in site protections that displays a simple Retry Later if too many requests are being made to the site by one person at a time. As such, we are only scraping the information that is available from the works search page since that means we only search the number of pages in the search results rather than gathering the content that is available on the works' pages themselves. One such example of information that could have been gathered from the works' pages is the comments associated with the work. AO3 allows for author-specific comments sections in which the author of the work can choose whether or not to allow comments and if they are allowing comments, whether those comments need to come from someone who holds an account with the site itself. While these comments could have had some interested information for us to take a look at, we area already dealing with an extremely large amount of data and the scraping of the comments section would have required that we scrape each individual webpage for the 3,523 different works that we have gathered data on.</p>
 
 </div>
 </div>
@@ -14756,7 +14767,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>With our helper function for our basic data, we can now  iterate through the pages of the searched works and gather the basic data into the CSV files previously created. Due to AO3's built in site protections, We will scrape by increments of 100 pages and pause between each code block execution in order to ensure that we can gather all of the data we are trying to request from the site.</p>
+<p>With our helper function for our basic data, we can now  iterate through the pages of the searched works and gather the basic data into the CSV files previously created. As previously stated, due to AO3's built in site protections, we will scrape by increments of pages and pause between each set of pages in order to ensure that we can gather all of the data we are trying to request from the site. For our purposes, we will be using an increment of 100 pages as it was a nice round number that was regularly accepted by the site and then a pause time of 10 minutes so that enough time had elapsed after our previous round that it would accept the next round of 100 pages being requested.</p>
 
 </div>
 </div>
@@ -14832,7 +14843,8 @@ Parsing has finished, the remainder of basic data has been consumed
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The above print statements are simply to show that the parser has completed running and is moving on to the next code snippet where we will store the information we've collected in a pandas dataframe and verify that our parsing was successful.</p>
+<p>The output of the page parsing into the CSV files is several print statements that just allow us to view where our current parsing status is, as we have a 10 minute break included in our parsing so we want to be able to know that everything is continuing to process and move along smoothly.</p>
+<p>With all of the data parsed into a CSV file, we can now use the built in pandas functionality to create a pandas dataframe that we can use to manipulate our data.</p>
 
 </div>
 </div>
@@ -15005,7 +15017,7 @@ Parsing has finished, the remainder of basic data has been consumed
       <td>104</td>
       <td>286</td>
       <td>133</td>
-      <td>21617</td>
+      <td>21619</td>
       <td>\nUnderageOther Relationship Tags to Be Added ...</td>
       <td>\nHarry was woefully unprepared for the Tri-Wi...</td>
     </tr>
@@ -15045,7 +15057,7 @@ Parsing has finished, the remainder of basic data has been consumed
       <td>38</td>
       <td>825</td>
       <td>67</td>
-      <td>7870</td>
+      <td>7871</td>
       <td>\nUnderageRegulus Black/Sirius Black Alphard B...</td>
       <td>\nThe morning after the night before. Sirius i...</td>
     </tr>
@@ -15105,7 +15117,7 @@ Parsing has finished, the remainder of basic data has been consumed
       <td>23</td>
       <td>753</td>
       <td>50</td>
-      <td>43545</td>
+      <td>43553</td>
       <td>\nRape/Non-Con UnderageHarry Potter/Quirinus Q...</td>
       <td></td>
     </tr>
@@ -15145,7 +15157,147 @@ Parsing has finished, the remainder of basic data has been consumed
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Data-Processing"><center>Data Processing</center><a class="anchor-link" href="#Data-Processing">&#182;</a></h3><p>We now have a singular data frame</p>
+<h3 id="Data-Processing"><center>Data Processing</center><a class="anchor-link" href="#Data-Processing">&#182;</a></h3><p>We now have a singular data frame, that contains all relevant information about fanfiction works that were created between May 23rd, 2020, and June 19th, 2020. However, this is the raw data so we want to first check that our dataframe is storing the data as the correct types.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Display the data frame columns with their associated types</span>
+<span class="n">AO3</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>Title            object
+Author           object
+ID                int64
+Date_updated     object
+Rating           object
+Pairing          object
+Warning          object
+Complete         object
+Language         object
+Word_count       object
+Num_chapters      int64
+Num_comments      int64
+Num_kudos         int64
+Num_bookmarks     int64
+Num_hits          int64
+Tags             object
+Summary          object
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>As we see above, while most of the data is properly stored: integers are all stored as int64 types and strings stored are objects, one column is not with Date_Updated being stored as a string object rather than a date type. Below we update the dataframe so that Date_Updated is stored correctly and we will be able to properly use it for our data analysis.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Update the dataframe so that Date_Updated is properly stored as a datetime object </span>
+<span class="n">AO3</span><span class="p">[</span><span class="s1">&#39;Date_updated&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">AO3</span><span class="p">[</span><span class="s1">&#39;Date_updated&#39;</span><span class="p">])</span>
+
+<span class="c1">#Display the updated types of the dataframe</span>
+<span class="n">AO3</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>Title                    object
+Author                   object
+ID                        int64
+Date_updated     datetime64[ns]
+Rating                   object
+Pairing                  object
+Warning                  object
+Complete                 object
+Language                 object
+Word_count               object
+Num_chapters              int64
+Num_comments              int64
+Num_kudos                 int64
+Num_bookmarks             int64
+Num_hits                  int64
+Tags                     object
+Summary                  object
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Returning to our original purpose, we want to see how Rowling's tweets may have impacted the posting of fans of her works who belong to the LGBTQIA+ community. As AO3 contains transformative works, and the original source material does not contain any LGBTQIA+ representation, the best way to view any potential impact is by identifying if a change occurred in the number of fanfiction works posted with LGBTQIA+ content. Especially since authors may have posted retaliatory works in which they transformed one or more of the canon characters within the work to be queer. Below shows one such example in which AO3 author, ughdotcom, posted a work and specified in their notes that the work was posted as a response to something JK Rowling had previously expressed. <a href="https://archiveofourown.org/works/22817488">[4]</a></p>
+<center><b>ughdotcom's Anti Terf Posting</b></center>
+<center><img src="ughdotcom.png"></center><p>Therefore, in order to best analyze potential responses by fanfiction authors, we will search for the occurrence of various queer identities and flag their presence within the tags so that we can use those flags to identify rates of posting. As seen above, the tags may contain markers before canon character names that indicate an update to something about this character, in this particular work, the character Hermione Granger is trans and Luna Lovegood is genderqueer.</p>
+<p>As gender and sexual identity expression is constantly changing and evolving, we will attempt to flag for most major sexual and gender identities, but there is the possibility that we may miss some. Our flags will center around the following groups who are members of the LGBTQIA+ community: lesbian, gay, bisexual, trans, nonbinary, queer, intersex, asexual, agender, and aromantic.</p>
 
 </div>
 </div>
@@ -15154,10 +15306,37 @@ Parsing has finished, the remainder of basic data has been consumed
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Flag for presence of Lesbian</span>
+
+
+<span class="c1">#Flag for presence of Gay </span>
+
+
+<span class="c1">#Flag for presence of Bisexual </span>
+
+
+<span class="c1">#Flag for presence of Trans </span>
+
+
+<span class="c1">#Flag for presence of Nonbinary</span>
+
+
+<span class="c1">#Flag for presence of Queer </span>
+
+
+<span class="c1">#Flag for presence of Intersex </span>
+
+
+<span class="c1">#Flag for presence of Asexual </span>
+
+
+<span class="c1">#Flag for presence of Agender </span>
+
+
+<span class="c1">#Flag for presence of Aromantic </span>
 </pre></div>
 
      </div>
