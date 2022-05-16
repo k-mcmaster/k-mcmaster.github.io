@@ -14853,7 +14853,7 @@ Parsing has finished, the remainder of basic data has been consumed
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Use read_csv to read the data stored in the CSV files into pandas dataframes</span>
@@ -15166,7 +15166,7 @@ Parsing has finished, the remainder of basic data has been consumed
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Display the data frame columns with their associated types</span>
@@ -15188,7 +15188,7 @@ Parsing has finished, the remainder of basic data has been consumed
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[33]:</div>
 
 
 
@@ -15233,7 +15233,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Update the dataframe so that Date_Updated is properly stored as a datetime object </span>
@@ -15258,7 +15258,7 @@ dtype: object</pre>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[34]:</div>
 
 
 
@@ -15306,7 +15306,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Flag for presence of Lesbian</span>
@@ -15328,7 +15328,7 @@ dtype: object</pre>
 <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_queer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;queer&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1">#Flag for presence of Intersex </span>
-<span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_intesex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;intersex&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_intersex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;intersex&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1">#Flag for presence of Asexual </span>
 <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_ace&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;asexual&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -15338,6 +15338,15 @@ dtype: object</pre>
 
 <span class="c1">#Flag for presence of Aromantic </span>
 <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_aro&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;aromantic&quot;</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#Flag all dealing with gender </span>
+<span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;gender_flag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="p">(</span><span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_trans&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_nb&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_queer&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_intersex&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_agender&quot;</span><span class="p">]),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#Flag all dealing with sexuality </span>
+<span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;sexuality_flag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="p">(</span><span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_lesbian&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_gay&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_bisexual&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_queer&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_ace&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;flag_aro&quot;</span><span class="p">]),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#Flag all LGBT </span>
+<span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;all_flags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="p">(</span><span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;gender_flag&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="n">AO3</span><span class="p">[</span><span class="s2">&quot;sexuality_flag&quot;</span><span class="p">]),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="c1">#Display the final dataframe</span>
 <span class="n">AO3</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -15358,7 +15367,7 @@ dtype: object</pre>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
 
 
 
@@ -15392,16 +15401,16 @@ dtype: object</pre>
       <th>Language</th>
       <th>Word_count</th>
       <th>...</th>
-      <th>flag_lesbian</th>
-      <th>flag_gay</th>
-      <th>flag_bisexual</th>
       <th>flag_trans</th>
       <th>flag_nb</th>
       <th>flag_queer</th>
-      <th>flag_intesex</th>
+      <th>flag_intersex</th>
       <th>flag_ace</th>
       <th>flag_agender</th>
       <th>flag_aro</th>
+      <th>gender_flag</th>
+      <th>sexuality_flag</th>
+      <th>all_flags</th>
     </tr>
   </thead>
   <tbody>
@@ -15514,16 +15523,16 @@ dtype: object</pre>
       <td>English</td>
       <td>128,631</td>
       <td>...</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
       <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>5</th>
@@ -15647,7 +15656,7 @@ dtype: object</pre>
     </tr>
   </tbody>
 </table>
-<p>10 rows × 27 columns</p>
+<p>10 rows × 30 columns</p>
 </div>
 </div>
 
@@ -15661,7 +15670,7 @@ dtype: object</pre>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Exploratory-Data-Analysis"><center>Exploratory Data Analysis</center><a class="anchor-link" href="#Exploratory-Data-Analysis">&#182;</a></h3><p>Now our data is officially set with everything we should need. We can begin exploring how all of it breaks down</p>
+<h3 id="Exploratory-Data-Analysis"><center>Exploratory Data Analysis</center><a class="anchor-link" href="#Exploratory-Data-Analysis">&#182;</a></h3><p>Now our data is officially set with everything we should need. We can begin exploring how all of it breaks down. We'll start with viewing how the distribution of the updating of fanfics. While some of this data may be past our two week deadline, as authors can update their works anytime after posting them to the site, we should be able to view the typical date spread of the site for works that were posted in a 4 week time period.</p>
 
 </div>
 </div>
