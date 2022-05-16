@@ -14573,8 +14573,149 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Introduction"><center>Introduction</center><a class="anchor-link" href="#Introduction">&#182;</a></h3><p>Fans are often known for using their talents and dedication to create new media based on the things they enjoy. One of the best examples of this is the writing and reading of fanfiction, the practice in which amateur authors may take aspects from the original content that they enjoyed and transforming them into original works of their own creation. There are various methods that these authors use to share their works with other individuals who also enjoyed the original piece of media but one of the most common is to post the work to a dedicated site for the posting and reading of fanfiction. While there are quite a few options available, we'll be focusing on Archive of Our Own, known colloquially as AO3, for our purposes as AO3's built in tagging and data storage system will allow us to search through the works of fiction using the author's own tags for their work rather than attempting to create tags ourself.</p>
-<p>However, since AO3 currently has over nine million works, in order to better analyze the data associated with the site and trends of fanfiction authors, we'll be focusing on writings by fans of a specific piece of media: the Harry Potter series written by J.K. Rowling. Additionally, we'll be specifically be focusing on the fanfiction written around a specific date in time as there are over 300,000 works for that series alone.</p>
-<p>On June 6th of 2020, author J.K. Rowling took to Twitter to express her displeasure over the use of the phrase "people who menstruate" rather than the word women. This tweet and the subsequent tweets that followed it came under a lot of backlash with trans activists and fans of the Harry Potter series. This was not the first time that author J.K. Rowling had expressed such views and received backlash, but it is one of the most notable, so we will be aanalyzing works of fanfiction posted onto AO3 for the month before the tweet was made and the month following the tweet to view the potential impact that Rowling's postings may have had on the writings of the LGBTQIA+ community members and their allies.</p>
+<p>However, since AO3 currently has over nine million works, in order to better analyze the data associated with the site and trends of fanfiction authors, we'll be focusing on writings by fans of a specific piece of media: the Harry Potter series written by J.K. Rowling.<a href="https://archiveofourown.org/works/search?work_search%5Bquery%5D=">[1]</a> Additionally, we'll be specifically be focusing on the fanfiction written around a specific date in time as there are over 300,000 works for that series alone.</p>
+<p>On June 6th of 2020, author J.K. Rowling took to Twitter to express her displeasure over the use of the phrase "people who menstruate" rather than the word women.<a href="https://www.glamour.com/story/a-complete-breakdown-of-the-jk-rowling-transgender-comments-controversy">[2]</a> This tweet and the subsequent tweets that followed it came under a lot of backlash with trans activists and fans of the Harry Potter series. This was not the first time that author J.K. Rowling had expressed such views and received backlash, but it is one of the most notable, so we will be aanalyzing works of fanfiction posted onto AO3 for the month before the tweet was made and the month following the tweet to view the potential impact that Rowling's postings may have had on the writings of the LGBTQIA+ community members and their allies.</p>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Data-Collection"><center>Data Collection</center><a class="anchor-link" href="#Data-Collection">&#182;</a></h3><p>As AO3 does not have a built in API, we will need to build our own method of scraping the data found on the site. In order to collect the data and avoid unneccesary scraping we'll be using AO3's built in search function to pre-search for works that were created between our dates of interest: May 6th,2020 and July 5th, 2020. We do this by accessing the Works Search page located <a href="https://archiveofourown.org/works/search">here</a>, and entering our parameters into the Any Search field: created_at:["2020-05-06" TO "2020-07-05"]. This will generate the link that we can use in the data scraper that will gather the information about the works for us, located <a href="https://archiveofourown.org/works/search?commit=Search&amp;page=1&amp;work_search[bookmarks_count]=&amp;work_search[character_names]=&amp;work_search[comments_count]=&amp;work_search[complete]=&amp;work_search[creators]=&amp;work_search[crossover]=&amp;work_search[fandom_names]=Harry+Potter+-+J.+K.+Rowling&amp;work_search[freeform_names]=&amp;work_search[hits]=&amp;work_search[kudos_count]=&amp;work_search[language_id]=&amp;work_search[query]=created_at%3A[%222020-05-06%22+TO+%222020-07-05%22]&amp;work_search[rating_ids]=&amp;work_search[relationship_names]=&amp;work_search[revised_at]=&amp;work_search[single_chapter]=0&amp;work_search[sort_column]=created_at&amp;work_search[sort_direction]=asc&amp;work_search[title]=&amp;work_search[word_count]=">here</a>.</p>
+<p>By looking at our search results, we will see that we will be scraping the information about 8,784 works that were created and area available publicly without an account in the 2 month time period we've identified. Below, we will first import the libararies necessary for this project.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import the libraries necessary to complete this project </span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span> 
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> 
+
+
+<span class="kn">import</span> <span class="nn">json</span> 
+<span class="kn">import</span> <span class="nn">os.path</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Next, we need to inspect the page to see how the data on each page is stored. By using the developers tools, we can see that the results of the search are displayed in a class identified as a “works index group" and each work is a list item below that with the role "article". We know that there are 8,784 works to be consumed, and there are 20 works displayed on each search page so we'll need to request the informtion from 440 pages. We split the URL into parts before and after the page number is stored to that we can complete our requests through an iterative process which automatically updates the page number used to request data. Then we initialize a couple new files to store the content from the scraping as we'll be completing it in page portions and that would make it difficult to store as a pandas dataframe right off the bat.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Split the URL into parts and store the current page number with those parts </span>
+<span class="n">urlpt1</span> <span class="o">=</span> <span class="s2">&quot;https://archiveofourown.org/works/search?commit=Search&amp;page=&quot;</span>
+<span class="n">currpagenum</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">urlpt2</span> <span class="o">=</span> <span class="s2">&quot;&amp;work_search[bookmarks_count]=&amp;work_search[character_names]=&amp;work_search[comments_count]=&amp;work_search[complete]=&amp;work_search[creators]=&amp;work_search[crossover]=&amp;work_search[fandom_names]=Harry+Potter+-+J.+K.+Rowling&amp;work_search[freeform_names]=&amp;work_search[hits]=&amp;work_search[kudos_count]=&amp;work_search[language_id]=&amp;work_search[query]=created_at%3A[%222020-05-06%22+TO+%222020-07-05%22]&amp;work_search[rating_ids]=&amp;work_search[relationship_names]=&amp;work_search[revised_at]=&amp;work_search[single_chapter]=0&amp;work_search[sort_column]=created_at&amp;work_search[sort_direction]=asc&amp;work_search[title]=&amp;work_search[word_count]=&quot;</span>
+
+<span class="c1">#Identified the number of works and pages that the scraper will need to iterate through</span>
+<span class="n">works</span> <span class="o">=</span> <span class="mi">8784</span>
+<span class="n">pages</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">works</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1">#Iniate a new file to store the basic content from the scraping </span>
+<span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">,</span> <span class="s1">&#39;Author&#39;</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Date_updated&#39;</span><span class="p">,</span> <span class="s1">&#39;Rating&#39;</span><span class="p">,</span> <span class="s1">&#39;Pairing&#39;</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">,</span> <span class="s1">&#39;Complete&#39;</span><span class="p">,</span> <span class="s1">&#39;Language&#39;</span><span class="p">,</span> <span class="s1">&#39;Word_count&#39;</span><span class="p">,</span> <span class="s1">&#39;Num_chapters&#39;</span><span class="p">,</span> <span class="s1">&#39;Num_comments&#39;</span><span class="p">,</span> <span class="s1">&#39;Num_kudos&#39;</span><span class="p">,</span> <span class="s1">&#39;Num_bookmarks&#39;</span><span class="p">,</span> <span class="s1">&#39;Num_hits&#39;</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;storedbasic.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">storedbasic</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">storedbasic</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+
+<span class="c1">#Initiate a new file to store the more complex text content from the scraping</span>
+<span class="n">header_row</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">,</span> <span class="s1">&#39;Summary&#39;</span><span class="p">,</span> <span class="s1">&#39;Date_published&#39;</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;storedcomplex.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">storedcomplex</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">storedcomplex</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">header_row</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now that we've completed some of our basic work, we can begin to design some of the functions we'll need to call to scrape the data out of the page. Specifically, we'll need one function to read in the basic content and another to read in the more complex text content such as the tags. One piece of information that we could scrape but are choosing not to for the purpose of this project is the Comments on the published works. While this could have some interested information for us to take a look at, we are already dealing with an extremely large amount of data and the Comments section of each work does not have any bearing on what our true aim is with this project.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Function to gather basic data </span>
+
+<span class="c1">#Function to gather complex text data </span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>With our helper functions defined, we can now define our main function to iterate through the pages of the searched works and gather the data into the CSV files previously created.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">urlpt1</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">currpagenum</span><span class="p">)</span> <span class="o">+</span> <span class="n">urlpt2</span><span class="p">)</span>
+
+<span class="c1">#Use BeautifulSoup to parse the data as html</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Our data has been stored into CSV files and we can now transform our data into pandas data frames. First we will create a pandas data frame that stores the basic data and then another that stores the complex text data. Then we Join both data frames to create one master dataframe that we can use to view and do any tidying that may be necessary.</p>
 
 </div>
 </div>
